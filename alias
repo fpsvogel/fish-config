@@ -1,0 +1,270 @@
+# GIT
+
+# Tip: VS Code keybinding to insert current filename in terminal.
+# Add to keybindings.json, via the command "Preferences: Open Keyboard Shortcuts (JSON)".
+# {
+#   "key": "cmd+shift+b",
+#   "command": "workbench.action.terminal.sendSequence",
+#   "args": { "text": " ${relativeFile}" },
+#   "when": "terminalFocus"
+# },
+
+function git_current_branch
+  git symbolic-ref --short HEAD
+end
+
+# Catch-all for "master" or  "main"
+function main_branch
+  if git cat-file -e refs/heads/master 2>/dev/null
+    echo "master"
+  else if git cat-file -e refs/heads/main 2>/dev/null
+    echo "main"
+  end
+end
+
+alias ga='git add'
+alias gap='git add --patch'
+alias gau='git add -u'
+
+# Add all except the files given in the arguments
+function gax
+  set args
+  for file in $argv
+    set args $args ":!$file"
+  end
+  git add -- . $args
+end
+
+alias gb='git branch'
+alias gbc='git_current_branch | pbcopy'
+
+# Delete current branch locally
+function gbd
+  set branch (git_current_branch)
+  git switch (main_branch)
+  git branch -D $branch
+end
+
+# Delete all local branches that no longer exist on remote
+function gbda
+  git fetch -p
+  for branch in (git for-each-ref --format "%(refname) %(upstream:track)" refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}')
+      git branch -D $branch
+  end
+end
+
+alias gc='git clone'
+alias gcl='git clean -fd'
+alias gco='git checkout'
+alias gcp='git cherry-pick'
+
+function cu
+  git add -u -- ':!.env'
+  git commit --allow-empty-message --message $argv
+end
+
+# Commit staged files, or else all except .env
+function cm
+  set staged_files (git status -s | grep "^[MTADRCU]")
+
+  if test -n "$staged_files"
+    git commit --allow-empty-message --message $argv
+  else
+    git add -- . ':!.env'
+    git commit --allow-empty-message --message $argv
+  end
+end
+
+# Amend commit with staged files, or else all except .env
+function ca
+  if test (count $argv) -gt 0
+    git add $argv
+  end
+
+  set staged_files (git status -s | grep "^[MTADRCU]")
+
+  if test -n "$staged_files"
+    git commit --amend --no-edit
+  else
+    git add -- . ':!.env'
+    git commit --amend --no-edit
+  end
+end
+
+alias gd='git diff'
+alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
+alias gls='gl -S'
+alias glsd='gl -p -S'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gpff='git push --force'
+alias gpl='git pull'
+alias pr='echo "https://github.com/kin/dot-com/compare/(git_current_branch)" | pbcopy'
+
+alias grm='git switch (main_branch); git pull; git switch -; git rebase (main_branch)'
+alias gri='git rebase -i'
+
+# Interactive rebase last n commits
+function grn
+  git rebase -i "HEAD~$argv"
+end
+
+# Interactive rebase for current branch or main
+function gr
+  if test (git_current_branch) = (main_branch)
+    set total_commits (git rev-list --count HEAD)
+    set commits_to_use (math "min(10, $total_commits)")
+    git rebase -i "HEAD~$commits_to_use"
+  else
+    set total_commits (git rev-list --count HEAD --not (main_branch))
+    git rebase -i "HEAD~$total_commits"
+  end
+end
+
+alias grc='git -c core.editor=true rebase --continue'
+alias gra='git rebase --abort'
+alias grl='git reflog'
+alias grt='git reset'
+alias grh='git reset HEAD~'
+alias grha='git reset --hard'
+alias gro='git restore'
+alias gros='git restore db/schema.rb db/data_schema.rb'
+alias grosm='git restore --source (main_branch) db/schema.rb db_data_schema.rb'
+alias grom='git restore --source (main_branch)'
+alias grv='git revert --no-edit'
+alias gst='git stash --include-untracked'
+alias gsp='git stash pop'
+alias gsl='git stash list'
+alias gss='git stash show'
+alias gssp='git stash show -p'
+alias gs='git status'
+
+# Git switch with stash
+function gw
+  git stash --include-untracked
+  set output (git branch -a | grep -v remotes | grep -i $argv[1] | head -n 1 | xargs)
+  if test -n "$output"
+    git switch $output
+  else if string match -q -r "/" $argv[1]
+    git switch $argv[1]
+  else
+    set branch (git branch -a | grep -i $argv[1] | head -n 1 | xargs)
+    set branch (string replace "remotes/origin/" "" $branch)
+    git switch $branch
+  end
+end
+
+alias gw-='git stash --include-untracked; git switch -'
+alias gwc='git switch --create'
+alias gwm='git stash --include-untracked; git switch (main_branch)'
+
+# MISC.
+alias cl='clear'
+
+# DOCKER
+alias ra='bin/compose up'
+alias rr='bin/start-dev-workers'
+
+# POSTGRESQL
+alias postgres='psql -U postgres'
+
+# RUBY
+alias bt='bin/bridgetown'
+alias bs='bin/bridgetown start'
+
+# RAKE
+alias rt='rake test'
+
+# RAILS
+alias r='rspec'
+alias rs='rails s'
+alias rsp='PROFILE=true rails s'
+alias rc='rails c'
+alias rcv='rails c --sandbox'
+alias rmg='rails db:migrate RAILS_ENV=development'
+alias rmp='rails db:test:prepare'
+alias rmgp='rails db:test:prepare'
+alias rmt='rails db:migrate RAILS_ENV=test'
+alias rmgt='rails db:migrate RAILS_ENV=test'
+
+function rmr
+  rails db:rollback STEP=$argv[1]
+end
+
+function rmrt
+  rails db:rollback RAILS_ENV=test STEP=$argv[1]
+end
+
+function rmd
+  rails db:migrate:down VERSION=$argv[1]
+end
+
+function rmdt
+  rails db:migrate:down RAILS_ENV=test VERSION=$argv[1]
+end
+
+function rmu
+  rails db:migrate:up VERSION=$argv[1]
+end
+
+function rmut
+  rails db:migrate:up RAILS_ENV=test VERSION=$argv[1]
+end
+
+alias rlog='tail -f log/development.log'
+alias b='bundle'
+
+# EXERCISM
+function xd
+  exercism download --track=(basename (pwd)) --exercise=$argv[1]
+end
+
+function xt
+  switch (basename (pwd))
+    case haskell
+      cd (ls -td -- */ | head -n 1)
+      stack test
+      cd -
+    case ruby
+      ruby (ls -td -- */ | head -n 1)*_test.rb
+    case javascript
+      cd (ls -td -- */ | head -n 1)
+      pnpm run test
+      cd -
+    case roc
+      roc test (ls -td -- */ | head -n 1)*-test.roc
+  end
+end
+
+function xs
+  switch (basename (pwd))
+    case haskell
+      exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -wholename "**/src/*.hs") (ls -td -- */ | head -n 1)package.yaml
+    case ruby
+      exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.rb" ! -name "*_test.rb")
+    case javascript
+      exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.js" ! -name "*.spec.js" ! -name "*.config.js" ! -path "*/node_modules/*")
+    case roc
+      exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.roc" ! -name "*-test.roc")
+  end
+end
+
+# DRAGONRUBY GAME TOOLKIT
+alias dr='./dragonruby'
+
+# HASKELL
+alias cr='cabal run'
+alias cv='cabal repl --with-ghc=doctest'
+# TODO avoid running cabal test first
+alias ct='cabal test > /dev/null; cabal run test:tests'
+function cc
+  cabal-prettify --this --expose
+  for file in *.cabal
+    sed -i '/other-modules:/ s/ Spec$//' $file
+  end
+end
+
+# PNPM
+alias ni='pnpm install'
+alias nt='pnpm test'
+alias pnpx='pnpm dlx'
