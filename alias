@@ -54,7 +54,6 @@ function gbda
 end
 
 alias gc='git clone'
-alias gcl='git clean -fd'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 
@@ -127,6 +126,7 @@ alias grl='git reflog'
 alias grt='git reset'
 alias grh='git reset HEAD~'
 alias grha='git reset --hard'
+alias grhaa='git clean -fd'
 alias gro='git restore'
 alias gros='git restore db/schema.rb db/data_schema.rb'
 alias grosm='git restore --source (main_branch) db/schema.rb db_data_schema.rb'
