@@ -144,9 +144,7 @@ alias gss='git stash show'
 alias gssp='git stash show -p'
 alias gs='git status -u'
 
-# Git switch with stash
 function gw
-  git stash --include-untracked
   set output (git branch -a | grep -v remotes | grep -i $argv[1] | head -n 1 | xargs)
   if test -n "$output"
     git switch $output
@@ -159,9 +157,9 @@ function gw
   end
 end
 
-alias gw-='git stash --include-untracked; git switch -'
+alias gw-='git switch -'
 alias gwc='git switch --create'
-alias gwm='git stash --include-untracked; git switch (main_branch)'
+alias gwm='git switch (main_branch)'
 
 # MISC.
 alias cl='clear'
