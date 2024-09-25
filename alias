@@ -59,7 +59,12 @@ alias gcp='git cherry-pick'
 
 function cu
   git add -u -- ':!.env'
-  git commit --allow-empty-message --message $argv
+
+  if test (count $argv) -gt 0
+    git commit --message $argv
+  else
+    git commit --amend --no-edit
+  end
 end
 
 # Commit staged files, or else all except .env
@@ -67,10 +72,10 @@ function cm
   set staged_files (git status -s | grep "^[MTADRCU]")
 
   if test -n "$staged_files"
-    git commit --allow-empty-message --message $argv
+    git commit --message $argv
   else
     git add -- . ':!.env'
-    git commit --allow-empty-message --message $argv
+    git commit --message $argv
   end
 end
 
