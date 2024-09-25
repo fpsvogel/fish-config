@@ -137,7 +137,7 @@ alias gsp='git stash pop'
 alias gsl='git stash list'
 alias gss='git stash show'
 alias gssp='git stash show -p'
-alias gs='git status'
+alias gs='git status -u'
 
 # Git switch with stash
 function gw
