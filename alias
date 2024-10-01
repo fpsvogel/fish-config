@@ -95,6 +95,7 @@ function ca
   end
 end
 
+alias cme='git commit --allow-empty -m "Trigger build"'
 alias gd='git diff'
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
 alias gls='gl -S'
