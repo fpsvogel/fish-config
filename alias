@@ -103,7 +103,7 @@ alias glsd='gl -p -S'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gpff='git push --force'
-alias gpl='git pull'
+alias gpl='git restore .env; git pull'
 alias pr='echo "https://github.com/kin/dot-com/compare/(git_current_branch)" | pbcopy'
 
 alias grm='git switch (main_branch); git pull; git switch -; git rebase (main_branch)'
@@ -138,8 +138,19 @@ alias grss='git restore db/schema.rb db/data_schema.rb'
 alias grsm='git restore --source (main_branch)'
 alias grssm='git restore --source (main_branch) db/schema.rb db_data_schema.rb'
 alias grv='git revert --no-edit'
-alias gst='git stash --include-untracked'
-alias gsp='git stash pop'
+
+function gst
+  git add .env
+  git stash --keep-index --include-untracked
+  git reset .env
+end
+
+function gsp
+  git add .env
+  git stash pop
+  git reset .env
+end
+
 alias gsl='git stash list'
 alias gss='git stash show'
 alias gssp='git stash show -p'
