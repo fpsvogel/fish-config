@@ -204,10 +204,10 @@ alias bt='bin/bridgetown'
 alias bs='bin/bridgetown start'
 
 # RAKE
+alias r='rake'
 alias rt='rake test'
 
 # RAILS
-alias r='rspec'
 alias rs='rails s'
 alias rsp='PROFILE=true rails s'
 alias rc='rails c'
