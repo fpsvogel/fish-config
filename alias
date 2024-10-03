@@ -97,6 +97,7 @@ end
 
 alias cme='git commit --allow-empty -m "Trigger build"'
 alias gd='git diff'
+alias gds='git add .; git diff --shortstat HEAD; git reset >/dev/null'
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
 alias gls='gl -S'
 alias glsd='gl -p -S'
@@ -286,7 +287,7 @@ alias dr='./dragonruby'
 alias cr='cabal run'
 alias cv='cabal repl --with-ghc=doctest'
 # TODO avoid running cabal test first
-alias ct='cabal test > /dev/null; cabal run test:tests'
+alias ct='cabal test >/dev/null; cabal run test:tests'
 function cc
   cabal-prettify --this --expose
   for file in *.cabal

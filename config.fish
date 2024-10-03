@@ -17,8 +17,6 @@ fish_add_path ~/cod/roc_nightly-macos_apple_silicon-2024-09-09-9a4d556725
 
 fish_add_path ~/.nvm/versions/node/v18.19.1/bin
 
-fish_add_path ~/cod/ruby-advent-of-code
-
 fish_add_path /opt/homebrew/opt/coreutils/libexec/gnubin
 # Copy commands here that should take precedence over coreutils (such as /bin/stty)
 fish_add_path ~/.bin
