@@ -207,6 +207,9 @@ alias bs='bin/bridgetown start'
 alias r='rake'
 alias rt='rake test'
 
+# YARD
+alias rv='bundle exec yard doctest | grep -v "^\[warn\]" | grep -v "^\s" | awk \'{if (NF || p) print; if (NF) p=1}\'' #' hides warnings
+
 # RAILS
 alias rs='rails s'
 alias rsp='PROFILE=true rails s'
