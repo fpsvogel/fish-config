@@ -22,3 +22,4 @@ fish_add_path /opt/homebrew/opt/coreutils/libexec/gnubin
 fish_add_path ~/.bin
 
 source ~/.config/fish/alias
+source ~/.deno/env.fish
