@@ -95,7 +95,7 @@ function ca
   end
 end
 
-alias cme='git commit --allow-empty -m "Trigger build"'
+alias ce='git commit --allow-empty -m "Trigger build"'
 alias gd='git diff'
 alias gds='git add .; git diff --shortstat HEAD; git reset >/dev/null'
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
@@ -126,8 +126,12 @@ end
 function grb
   if test (git_current_branch) = (main_branch)
     set total_commits (git rev-list --count HEAD)
-    set commits_to_use (math "min(10, $total_commits)")
-    git rebase -i "HEAD~$commits_to_use"
+
+    if test $total_commits -le 10
+      git rebase -i --root
+    else
+      git rebase -i "HEAD~10"
+    end
   else
     set total_commits (git rev-list --count HEAD --not (main_branch))
     git rebase -i "HEAD~$total_commits"
