@@ -23,8 +23,9 @@ function main_branch
 end
 
 alias ga='git add'
+alias gaa="git add -- . ':!.env'"
 alias gap='git add --patch'
-alias gau='git add -u'
+alias gau="git add -u -- ':!.env'"
 
 # Add all except the files given in the arguments
 function gax
