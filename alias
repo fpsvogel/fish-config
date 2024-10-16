@@ -124,7 +124,7 @@ function grn
 end
 
 # Interactive rebase for current branch or main
-function grb
+function gr
   if test (git_current_branch) = (main_branch)
     set total_commits (git rev-list --count HEAD)
 
@@ -143,13 +143,13 @@ alias grc='git -c core.editor=true rebase --continue'
 alias gra='git rebase --abort'
 alias grl='git reflog'
 alias grt='git reset'
-alias gr='git reset HEAD~'
-alias gx='git reset --hard'
+alias grh='git reset HEAD~'
+alias grha='git reset --hard'
 alias grhaa='git clean -fd'
-alias grs='git restore'
-alias grss='git restore db/schema.rb db/data_schema.rb'
-alias grsm='git restore --source (main_branch)'
-alias grssm='git restore --source (main_branch) db/schema.rb db_data_schema.rb'
+alias gro='git restore'
+alias gros='git restore db/schema.rb db/data_schema.rb'
+alias grom='git restore --source (main_branch)'
+alias grosm='git restore --source (main_branch) db/schema.rb db_data_schema.rb'
 alias grv='git revert --no-edit'
 
 function gst
