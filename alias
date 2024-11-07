@@ -178,15 +178,19 @@ alias gssp='git stash show -p'
 alias gs='git status -u'
 
 function gw
-  set output (git branch -a | grep -v remotes | grep -i $argv[1] | head -n 1 | xargs)
-  if test -n "$output"
-    git switch $output
-  else if string match -q -r "/" $argv[1]
-    git switch $argv[1]
+  if test "$argv[1]" = "-"
+    git switch -
   else
-    set branch (git branch -a | grep -i $argv[1] | head -n 1 | xargs)
-    set branch (string replace "remotes/origin/" "" $branch)
-    git switch $branch
+    set output (git branch -a | grep -v remotes | grep -i $argv[1] | head -n 1 | xargs)
+    if test -n "$output"
+      git switch $output
+    else if string match -q -r "/" $argv[1]
+      git switch $argv[1]
+    else
+      set branch (git branch -a | grep -i $argv[1] | head -n 1 | xargs)
+      set branch (string replace "remotes/origin/" "" $branch)
+      git switch $branch
+    end
   end
 end
 
