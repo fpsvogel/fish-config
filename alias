@@ -149,7 +149,7 @@ alias grhaa='git clean -fd'
 alias gro='git restore'
 alias gros='git restore db/schema.rb db/data_schema.rb'
 alias grom='git restore --source (main_branch)'
-alias grosm='git restore --source (main_branch) db/schema.rb db_data_schema.rb'
+alias grosm='git restore --source (main_branch) db/schema.rb db/data_schema.rb'
 alias grv='git revert --no-edit'
 
 function gst
@@ -256,6 +256,7 @@ end
 
 alias rlog='tail -f log/development.log'
 alias b='bundle'
+alias be='bundle exec'
 
 # EXERCISM
 function xd
