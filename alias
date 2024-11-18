@@ -200,6 +200,8 @@ alias gwm='git switch (main_branch)'
 
 # MISC.
 alias cl='clear'
+alias c='code'
+alias d='cd ~/dev'
 
 # DOCKER
 alias ra='bin/compose up'
