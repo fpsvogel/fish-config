@@ -222,6 +222,7 @@ alias rt='rake test'
 alias rv='bundle exec yard doctest | grep -v "^\[warn\]" | grep -v "^\s" | awk \'{if (NF || p) print; if (NF) p=1}\'' #' hides warnings
 
 # RAILS
+alias ss='spring stop'
 alias rs='rails s'
 alias rsp='PROFILE=true rails s'
 alias rc='rails c'
