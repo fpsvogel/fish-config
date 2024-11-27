@@ -264,6 +264,13 @@ alias be='bundle exec'
 # EXERCISM
 function xd
   exercism download --track=(basename (pwd)) --exercise=$argv[1]
+
+  switch (basename (pwd))
+    case typescript
+      cd (ls -td -- */ | head -n 1)
+      corepack yarn install
+      cd -
+  end
 end
 
 function xt
@@ -278,6 +285,10 @@ function xt
       cd (ls -td -- */ | head -n 1)
       pnpm run test
       cd -
+    case typescript
+      cd (ls -td -- */ | head -n 1)
+      corepack yarn test
+      cd -
     case roc
       roc test (ls -td -- */ | head -n 1)*-test.roc
   end
@@ -291,6 +302,8 @@ function xs
       exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.rb" ! -name "*_test.rb")
     case javascript
       exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.js" ! -name "*.spec.js" ! -name "*.config.js" ! -path "*/node_modules/*")
+    case typescript
+      exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.ts" ! -name "*.test.ts" ! -name "*.config.ts" ! -path "*/node_modules/*")
     case roc
       exercism submit (find (ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.roc" ! -name "*-test.roc")
   end
