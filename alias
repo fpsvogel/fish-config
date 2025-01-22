@@ -96,7 +96,7 @@ function ca
   end
 end
 
-alias ce='git commit --allow-empty -m "Trigger build"'
+alias ce='git commit --allow-empty -m "Empty commit to trigger CI"'
 alias gd='git diff'
 alias gds='git add .; git diff --shortstat HEAD; git reset >/dev/null'
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
