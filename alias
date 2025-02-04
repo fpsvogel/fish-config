@@ -96,6 +96,7 @@ function ca
   end
 end
 
+alias cam='git commit  --allow-empty --amend -m'
 alias ce='git commit --allow-empty -m "Empty commit to trigger CI"'
 alias gd='git diff'
 alias gds='git add .; git diff --shortstat HEAD; git reset >/dev/null'
