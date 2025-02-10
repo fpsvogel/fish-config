@@ -3,7 +3,8 @@
 SETUVAR --export EDITOR:code
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1erbenv/fish\x2drbenv
+SETUVAR _fisher_jorgebucaran_2F_nvm_2E_fish_files:\x7e/\x2econfig/fish/functions/_nvm_index_update\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_list\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_activate\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_deactivate\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/nvm\x2efish\x1e\x7e/\x2econfig/fish/completions/nvm\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1erbenv/fish\x2drbenv\x1ejorgebucaran/nvm\x2efish
 SETUVAR _fisher_rbenv_2F_fish_2D_rbenv_files:\x7e/\x2econfig/fish/functions/rbenv\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/rbenv\x2efish\x1e\x7e/\x2econfig/fish/completions/rbenv\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:brblack
@@ -35,4 +36,4 @@ SETUVAR fish_pager_color_description:yellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/opt/homebrew/sbin\x1e/Users/felipe\x2evogel/\x2envm/versions/node/v18\x2e19\x2e1/bin\x1e/opt/homebrew/bin\x1e/Users/felipe\x2evogel/\x2ebin\x1e/Users/felipe\x2evogel/cod/ruby\x2dadvent\x2dof\x2dcode\x1e/opt/homebrew/opt/haskell\x2dlanguage\x2dserver/bin\x1e/opt/homebrew/opt/cabal\x2dinstall/bin\x1e/Users/felipe\x2evogel/\x2elocal/bin\x1e/opt/homebrew/opt/llvm/bin\x1e/Users/felipe\x2evogel/\x2erbenv/shims
+SETUVAR fish_user_paths:/Users/felipe\x2evogel/\x2elocal/share/nvm/v22\x2e13\x2e1/bin\x1e/opt/homebrew/sbin\x1e/Users/felipe\x2evogel/\x2envm/versions/node/v18\x2e19\x2e1/bin\x1e/opt/homebrew/bin\x1e/Users/felipe\x2evogel/\x2ebin\x1e/Users/felipe\x2evogel/cod/ruby\x2dadvent\x2dof\x2dcode\x1e/opt/homebrew/opt/haskell\x2dlanguage\x2dserver/bin\x1e/opt/homebrew/opt/cabal\x2dinstall/bin\x1e/Users/felipe\x2evogel/\x2elocal/bin\x1e/opt/homebrew/opt/llvm/bin\x1e/Users/felipe\x2evogel/\x2erbenv/shims

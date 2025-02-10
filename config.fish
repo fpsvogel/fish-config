@@ -15,7 +15,7 @@ fish_add_path ~/.rbenv/shims
 fish_add_path ~/.rbenv/bin
 
 # JS
-fish_add_path ~/.nvm/versions/node/v18.19.1/bin
+fish_add_path $nvm_data/v22.13.1/bin
 source ~/.deno/env.fish
 
 # Haskell
