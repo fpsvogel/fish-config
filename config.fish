@@ -6,6 +6,7 @@ source ~/.config/fish/alias
 
 # misc.
 fish_add_path /opt/homebrew/bin
+fish_add_path /opt/homebrew/sbin
 set -gx DIRENV_LOG_FORMAT ""
 direnv hook fish | source
 
