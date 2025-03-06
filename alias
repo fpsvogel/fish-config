@@ -98,7 +98,22 @@ end
 
 alias cam='git commit  --allow-empty --amend -m'
 alias ce='git commit --allow-empty -m "Empty commit to trigger CI"'
-alias gd='git diff'
+
+function gd
+  set first_commit 1
+  set second_commit 0
+
+  if test (count $argv) -ge 1
+    set first_commit $argv[1]
+  end
+
+  if test (count $argv) -ge 2
+    set second_commit $argv[2]
+  end
+
+  git diff HEAD~$first_commit..HEAD~$second_commit
+end
+
 alias gds='git add .; git diff --shortstat HEAD; git reset >/dev/null'
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
 alias gls='gl -S'
