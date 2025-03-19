@@ -134,24 +134,24 @@ alias pr='echo "https://github.com/kin/dot-com/compare/(git_current_branch)" | p
 alias grm='git switch (main_branch); git pull; git switch -; git rebase (main_branch)'
 alias gri='git rebase -i'
 
-# Interactive rebase last n commits
-function grn
-  git rebase -i "HEAD~$argv"
-end
-
-# Interactive rebase for current branch or main
 function gr
-  if test (git_current_branch) = (main_branch)
-    set total_commits (git rev-list --count HEAD)
-
-    if test $total_commits -le 10
-      git rebase -i --root
-    else
-      git rebase -i "HEAD~10"
-    end
+  # Interactive rebase last n commits
+  if test (count $argv) -gt 0
+    git rebase -i "HEAD~$argv"
   else
-    set total_commits (git rev-list --count HEAD --not (main_branch))
-    git rebase -i "HEAD~$total_commits"
+    # Interactive rebase for main or feature branch
+    if test (git_current_branch) = (main_branch)
+      set total_commits (git rev-list --count HEAD)
+
+      if test $total_commits -le 10
+        git rebase -i --root
+      else
+        git rebase -i "HEAD~10"
+      end
+    else
+      set total_commits (git rev-list --count HEAD --not (main_branch))
+      git rebase -i "HEAD~$total_commits"
+    end
   end
 end
 
