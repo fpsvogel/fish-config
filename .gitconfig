@@ -1,0 +1,21 @@
+[user]
+  name = Felipe Vogel
+  email = fps.vogel@gmail.com
+[core]
+  editor = code --wait
+  pager = delta
+  mergeoptions = --no-edit
+	excludesFile = /Users/felipe.vogel/.gitignore_global
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true
+[init]
+  defaultBranch = main
+[merge]
+  conflictstyle = zdiff3
+[diff]
+  algorithm = histogram
+[push]
+  autoSetupRemote = true
