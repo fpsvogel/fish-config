@@ -219,9 +219,10 @@ alias cl='clear'
 alias c='code'
 alias d='cd ~/dev'
 
-# DOCKER
+# DOCKER, ETC.
 alias ra='bin/compose up'
 alias rr='bin/start-dev-workers'
+alias rv='bin/vite dev'
 
 # POSTGRESQL
 alias postgres='psql -U postgres'
@@ -235,7 +236,7 @@ alias r='rake'
 alias rt='rake test'
 
 # YARD
-alias rv='bundle exec yard doctest | grep -v "^\[warn\]" | grep -v "^\s" | awk \'{if (NF || p) print; if (NF) p=1}\'' #' hides warnings
+alias rd='bundle exec yard doctest | grep -v "^\[warn\]" | grep -v "^\s" | awk \'{if (NF || p) print; if (NF) p=1}\'' #' hides warnings
 
 # RAILS
 alias ss='spring stop'
