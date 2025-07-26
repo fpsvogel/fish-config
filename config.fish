@@ -23,3 +23,4 @@ fish_add_path /opt/homebrew/opt/coreutils/libexec/gnubin
 fish_add_path ~/.bin
 
 export LEFTHOOK=0
+export EDITOR="code"

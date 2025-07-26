@@ -210,6 +210,7 @@ function gw
   end
 end
 
+alias gt="git tag"
 alias gw-='git switch -'
 alias gwc='git switch --create'
 alias gwm='git switch (main_branch)'
@@ -345,3 +346,6 @@ end
 alias ni='pnpm install'
 alias nt='pnpm test'
 alias pnpx='pnpm dlx'
+
+# 🤨
+alias claude="/Users/felipe.vogel/.claude/local/claude"
