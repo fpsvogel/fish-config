@@ -23,9 +23,9 @@ function main_branch
 end
 
 alias ga='git add'
-alias gaa="git add -- . ':!.env'"
+alias gaa="git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'"
 alias gap='git add --patch'
-alias gau="git add -u -- ':!.env'"
+alias gau="git add -u -- ':!.env' ':!Gemfile' ':!Gemfile.lock'"
 
 # Add all except the files given in the arguments
 function gax
@@ -59,7 +59,7 @@ alias gco='git checkout'
 alias gcp='git cherry-pick'
 
 function cu
-  git add -u -- ':!.env'
+  git add -u -- ':!.env' ':!Gemfile' ':!Gemfile.lock'
 
   if test (count $argv) -gt 0
     git commit --message $argv
@@ -75,7 +75,7 @@ function cm
   if test -n "$staged_files"
     git commit --message $argv
   else
-    git add -- . ':!.env'
+    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
     git commit --message $argv
   end
 end
@@ -91,7 +91,7 @@ function ca
   if test -n "$staged_files"
     git commit --amend --no-edit
   else
-    git add -- . ':!.env'
+    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
     git commit --amend --no-edit
   end
 end
@@ -123,15 +123,19 @@ alias gpf='git push --force-with-lease'
 alias gpff='git push --force'
 
 function gpl
-  if test -f .env
-    git restore .env
+  set gemfile_changes (git status --porcelain Gemfile Gemfile.lock 2>/dev/null)
+  if test (basename (pwd)) = "dot-com" -a -n "$gemfile_changes"
+    git stash -- .env Gemfile Gemfile.lock
+    git pull
+    git stash pop
+  else
+    git pull
   end
-  git pull
 end
 
 alias pr='echo "https://github.com/kin/dot-com/compare/(git_current_branch)" | pbcopy'
 
-alias grm='git switch (main_branch); git pull; git switch -; git rebase (main_branch)'
+alias grm='gw (main_branch); git pull; gw -; git rebase (main_branch)'
 alias gri='git rebase -i'
 
 function gr
@@ -169,13 +173,24 @@ alias grosm='git restore --source (main_branch) db/schema.rb db/data_schema.rb'
 alias grv='git revert --no-edit'
 
 function gst
-  if test -f .env
-    git add .env
+  if test (basename (pwd)) = "dot-com"
+    git add .env Gemfile Gemfile.lock
     git stash --keep-index --include-untracked
-    git reset .env
+    git reset .env Gemfile Gemfile.lock
   else
-    git stash --keep-index --include-untracked
+    if test -f .env
+      git add .env
+      git stash --keep-index --include-untracked
+      git reset .env
+    else
+      git stash --keep-index --include-untracked
+    end
   end
+end
+
+# stash temporary changes
+function gstt
+  git stash -- .env Gemfile Gemfile.lock
 end
 
 function gsp
@@ -194,26 +209,41 @@ alias gssp='git stash show -p'
 alias gs='git status -u'
 
 function gw
+  set branch_to_switch ""
+
   if test "$argv[1]" = "-"
-    git switch -
+    set branch_to_switch "-"
+  else if test "$argv[1]" = "main"
+    set branch_to_switch "main"
   else
-    set output (git branch -a | grep -v remotes | grep -i $argv[1] | head -n 1 | xargs)
-    if test -n "$output"
-      git switch $output
+    # First try to find an exact local branch match (excluding remotes)
+    set exact_local_branch (git branch -a | grep -v remotes | grep -i $argv[1] | head -n 1 | xargs)
+    if test -n "$exact_local_branch"
+      set branch_to_switch $exact_local_branch
+    # If it contains a slash, treat it as a remote branch reference
     else if string match -q -r "/" $argv[1]
-      git switch $argv[1]
+      set branch_to_switch $argv[1]
     else
+      # Search all branches (including remotes) and strip the remote prefix
       set branch (git branch -a | grep -i $argv[1] | head -n 1 | xargs)
-      set branch (string replace "remotes/origin/" "" $branch)
-      git switch $branch
+      set branch_to_switch (string replace "remotes/origin/" "" $branch)
     end
+  end
+
+  set gemfile_changes (git status --porcelain Gemfile Gemfile.lock 2>/dev/null)
+  if test -n "$gemfile_changes"
+    git stash -- .env Gemfile Gemfile.lock
+    git switch $branch_to_switch
+    git stash pop
+  else
+    git switch $branch_to_switch
   end
 end
 
 alias gt="git tag"
-alias gw-='git switch -'
+alias gw-='gw -'
 alias gwc='git switch --create'
-alias gwm='git switch (main_branch)'
+alias gwm='gw (main_branch)'
 
 # MISC.
 alias cl='clear'
