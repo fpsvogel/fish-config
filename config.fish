@@ -29,3 +29,4 @@ fish_add_path ~/.local/pipx/venvs/datadog/bin
 
 export LEFTHOOK=0
 export EDITOR="code"
+export GIT_CONFIG_GLOBAL="/Users/felipe.vogel/.config/fish/.gitconfig"
