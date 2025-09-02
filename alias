@@ -377,8 +377,5 @@ alias ni='pnpm install'
 alias nt='pnpm test'
 alias pnpx='pnpm dlx'
 
-# 🤨
-alias claude="/Users/felipe.vogel/.claude/local/claude"
-
 # Kin
 alias kg="toggle-kin-gem administered_policies && toggle-kin-gem kin_portal"

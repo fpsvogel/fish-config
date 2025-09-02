@@ -34,5 +34,5 @@ SETUVAR fish_pager_color_description:yellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/Users/felipe\x2evogel/\x2elocal/pipx/venvs/datadog/bin\x1e/Users/felipe\x2evogel/\x2elocal/share/nvm/v22\x2e13\x2e1/bin\x1e/Users/felipe\x2evogel/\x2ebin\x1e/Users/felipe\x2evogel/\x2erbenv/shims\x1e/opt/homebrew/sbin\x1e/opt/homebrew/bin
+SETUVAR fish_user_paths:/Users/felipe\x2evogel/\x2elocal/bin\x1e/Users/felipe\x2evogel/\x2elocal/pipx/venvs/datadog/bin\x1e/Users/felipe\x2evogel/\x2elocal/share/nvm/v22\x2e13\x2e1/bin\x1e/Users/felipe\x2evogel/\x2ebin\x1e/Users/felipe\x2evogel/\x2erbenv/shims\x1e/opt/homebrew/sbin\x1e/opt/homebrew/bin
 SETUVAR nvm_default_version:v22\x2e19\x2e0

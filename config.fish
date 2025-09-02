@@ -24,6 +24,7 @@ fish_add_path /opt/homebrew/opt/coreutils/libexec/gnubin
 fish_add_path ~/.bin
 
 # Misc.
+fish_add_path ~/.local/bin
 fish_add_path ~/.local/pipx/venvs/datadog/bin
 
 export LEFTHOOK=0
