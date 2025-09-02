@@ -251,7 +251,7 @@ alias c='code'
 alias d='cd ~/dev'
 
 # DOCKER, ETC.
-alias ra='bin/compose up'
+alias ra='docker compose up'
 alias rr='bin/start-dev-workers'
 alias rv='bin/vite dev'
 
