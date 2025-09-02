@@ -10,7 +10,6 @@ fish_add_path /opt/homebrew/sbin
 
 # Direnv
 direnv hook fish | source
-# set -gx DIRENV_LOG_FORMAT "" # not needed anymore
 
 # Ruby
 fish_add_path ~/.rbenv/shims
