@@ -14,6 +14,7 @@ direnv hook fish | source
 # Ruby
 fish_add_path ~/.rbenv/shims
 fish_add_path ~/.rbenv/bin
+status --is-interactive; and rbenv init - --no-rehash fish | source
 
 # JS
 fish_add_path $nvm_data/v22.13.1/bin

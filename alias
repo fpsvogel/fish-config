@@ -23,9 +23,7 @@ function main_branch
 end
 
 alias ga='git add'
-alias gaa="git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'"
 alias gap='git add --patch'
-alias gau="git add -u -- ':!.env' ':!Gemfile' ':!Gemfile.lock'"
 
 # Add all except the files given in the arguments
 function gax
@@ -58,16 +56,6 @@ alias gc='git clone'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 
-function cu
-  git add -u -- ':!.env' ':!Gemfile' ':!Gemfile.lock'
-
-  if test (count $argv) -gt 0
-    git commit --message $argv
-  else
-    git commit --amend --no-edit
-  end
-end
-
 # Commit staged files, or else all except .env
 function cm
   set staged_files (git status -s | grep "^[MTADRCU]")
@@ -75,7 +63,11 @@ function cm
   if test -n "$staged_files"
     git commit --message $argv
   else
-    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
+    if test (basename (pwd)) = "dot-com"
+      git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
+    else
+      git add .
+    end
     git commit --message $argv
   end
 end
@@ -91,7 +83,11 @@ function ca
   if test -n "$staged_files"
     git commit --amend --no-edit
   else
-    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
+    if test (basename (pwd)) = "dot-com"
+      git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
+    else
+      git add .
+    end
     git commit --amend --no-edit
   end
 end
@@ -231,7 +227,7 @@ function gw
   end
 
   set gemfile_changes (git status --porcelain Gemfile Gemfile.lock 2>/dev/null)
-  if test -n "$gemfile_changes"
+  if test (basename (pwd)) = "dot-com" -a -n "$gemfile_changes"
     git stash -- .env Gemfile Gemfile.lock
     git switch $branch_to_switch
     git stash pop
