@@ -31,8 +31,15 @@ function gax
   for file in $argv
     set args $args ":!$file"
   end
-  git add -- . $args
+
+  if test (basename (pwd)) = "dot-com"
+    git add -- . $args ':!.env' ':!Gemfile' ':!Gemfile.lock'
+  else
+    git add -- . $args
+  end
 end
+
+alias gaxs='gax db/schema.rb'
 
 alias gb='git branch'
 alias gbc='git_current_branch | pbcopy'
