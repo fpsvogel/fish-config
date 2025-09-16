@@ -253,7 +253,7 @@ alias rr='bin/start-dev-workers'
 alias rv='bin/vite dev'
 
 # POSTGRESQL
-alias postgres='psql -U postgres'
+alias pg='psql -U postgres'
 
 # RUBY
 alias bt='bin/bridgetown'
