@@ -255,6 +255,9 @@ alias rv='bin/vite dev'
 # POSTGRESQL
 alias pg='psql -U postgres'
 
+# OTHER DB
+alias maria='mysql.server start'
+
 # RUBY
 alias bt='bin/bridgetown'
 alias bs='bin/bridgetown start'
