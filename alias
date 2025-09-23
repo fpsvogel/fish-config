@@ -119,8 +119,16 @@ end
 
 alias gds='git add .; git diff --shortstat HEAD; git reset >/dev/null'
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
-alias gls='gl -S'
-alias glsd='gl -p -S'
+
+function gls
+  gl --grep="$argv" -i
+end
+
+# show diffs
+function glsd
+  gl --grep="$argv" -i -p
+end
+
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gpff='git push --force'
