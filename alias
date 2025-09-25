@@ -63,6 +63,8 @@ alias gc='git clone'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 
+alias cma='git add .; git commit -m'
+
 # Commit staged files, or else all except .env
 function cm
   set staged_files (git status -s | grep "^[MTADRCU]")
@@ -78,6 +80,8 @@ function cm
     git commit --message $argv
   end
 end
+
+alias caa='git add .; git commit --amend --no-edit'
 
 # Amend commit with staged files, or else all except .env
 function ca
