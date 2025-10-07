@@ -23,6 +23,7 @@ function main_branch
 end
 
 alias ga='git add'
+alias gaa='git add .'
 alias gap='git add --patch'
 
 # Add all except the files given in the arguments
@@ -32,11 +33,7 @@ function gax
     set args $args ":!$file"
   end
 
-  if test (basename (pwd)) = "dot-com"
-    git add -- . $args ':!.env' ':!Gemfile' ':!Gemfile.lock'
-  else
-    git add -- . $args
-  end
+  git add -- . $args ':!.env' ':!Gemfile' ':!Gemfile.lock'
 end
 
 alias gaxs='gax db/schema.rb'
@@ -72,11 +69,7 @@ function cm
   if test -n "$staged_files"
     git commit --message $argv
   else
-    if test (basename (pwd)) = "dot-com"
-      git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
-    else
-      git add .
-    end
+    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
     git commit --message $argv
   end
 end
@@ -94,11 +87,7 @@ function ca
   if test -n "$staged_files"
     git commit --amend --no-edit
   else
-    if test (basename (pwd)) = "dot-com"
-      git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
-    else
-      git add .
-    end
+    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
     git commit --amend --no-edit
   end
 end
@@ -139,7 +128,7 @@ alias gpff='git push --force'
 
 function gpl
   set gemfile_changes (git status --porcelain Gemfile Gemfile.lock 2>/dev/null)
-  if test (basename (pwd)) = "dot-com" -a -n "$gemfile_changes"
+  if test -n "$gemfile_changes"
     git stash -- .env Gemfile Gemfile.lock
     git pull
     git stash pop
@@ -240,7 +229,7 @@ function gw
   end
 
   set gemfile_changes (git status --porcelain Gemfile Gemfile.lock 2>/dev/null)
-  if test (basename (pwd)) = "dot-com" -a -n "$gemfile_changes"
+  if test -n "$gemfile_changes"
     git stash -- .env Gemfile Gemfile.lock
     git switch $branch_to_switch
     git stash pop
