@@ -61,6 +61,7 @@ function fish_prompt
     set -l red (set_color -o red)
     set -l green (set_color -o green)
     set -l blue (set_color -o blue)
+    set -l black (set_color -o black)
     set -l normal (set_color normal)
 
     set -l arrow_color "$green"
@@ -80,11 +81,14 @@ function fish_prompt
         set -l repo_branch $red(_repo_branch_name $repo_type)
         set repo_info "$blue $repo_type:($repo_branch$blue)"
 
-        if _is_repo_dirty $repo_type
-            set -l dirty "$yellow ✗"
-            set repo_info "$repo_info$dirty"
-        end
+        # if _is_repo_dirty $repo_type
+        #     set -l dirty "$yellow ✗"
+        #     set repo_info "$repo_info$dirty"
+        # end
     end
 
-    echo -n -s $arrow ' '$cwd $repo_info $normal ' '
+    set -l dollar $black'$'
+
+    # echo -n -s $arrow ' '$cwd $repo_info $normal ' '
+    echo -n -s $cwd $repo_info $dollar $normal ' '
 end
