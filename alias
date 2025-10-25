@@ -9,6 +9,8 @@
 #   "when": "terminalFocus"
 # },
 
+set -g git_ignore_in_dot_com .env Gemfile Gemfile.lock
+
 function git_current_branch
   git symbolic-ref --short HEAD
 end
@@ -28,12 +30,11 @@ alias gap='git add --patch'
 
 # Add all except the files given in the arguments
 function gax
-  set args
-  for file in $argv
-    set args $args ":!$file"
+  git add -A
+  git reset $argv
+  if test (basename (pwd)) = "dot-com"
+    git reset $git_ignore_in_dot_com
   end
-
-  git add -- . $args ':!.env' ':!Gemfile' ':!Gemfile.lock'
 end
 
 alias gaxs='gax db/schema.rb'
@@ -62,21 +63,24 @@ alias gcp='git cherry-pick'
 
 alias cma='git add -A; git commit -m'
 
-# Commit staged files, or else all except .env
+# Commit staged files, or else all
 function cm
   set staged_files (git status -s | grep "^[MTADRCU]")
 
   if test -n "$staged_files"
     git commit --message $argv
   else
-    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
+    git add -A
+    if test (basename (pwd)) = "dot-com"
+      git reset $git_ignore_in_dot_com
+    end
     git commit --message $argv
   end
 end
 
 alias caa='git add -A; git commit --amend --no-edit'
 
-# Amend commit with staged files, or else all except .env
+# Amend commit with staged files, or else all
 function ca
   if test (count $argv) -gt 0
     git add $argv
@@ -87,7 +91,10 @@ function ca
   if test -n "$staged_files"
     git commit --amend --no-edit
   else
-    git add -- . ':!.env' ':!Gemfile' ':!Gemfile.lock'
+    git add -A
+    if test (basename (pwd)) = "dot-com"
+      git reset $git_ignore_in_dot_com
+    end
     git commit --amend --no-edit
   end
 end
@@ -127,9 +134,9 @@ alias gpf='git push --force-with-lease'
 alias gpff='git push --force'
 
 function gpl
-  set gemfile_changes (git status --porcelain Gemfile Gemfile.lock 2>/dev/null)
-  if test -n "$gemfile_changes"
-    git stash -- .env Gemfile Gemfile.lock
+  set env_or_gemfile_changes (git status --porcelain $git_ignore_in_dot_com 2>/dev/null)
+  if test (basename (pwd)) = "dot-com" -a -n "$env_or_gemfile_changes"
+    git stash -- $git_ignore_in_dot_com
     git pull
     git stash pop
   else
@@ -235,9 +242,9 @@ function gw
     end
   end
 
-  set gemfile_changes (git status --porcelain Gemfile Gemfile.lock 2>/dev/null)
-  if test -n "$gemfile_changes"
-    git stash -- .env Gemfile Gemfile.lock
+  set env_or_gemfile_changes (git status --porcelain $git_ignore_in_dot_com 2>/dev/null)
+  if test (basename (pwd)) = "dot-com" -a -n "$env_or_gemfile_changes"
+    git stash -- $git_ignore_in_dot_com
     git switch $branch_to_switch
     git stash pop
   else
