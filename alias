@@ -23,7 +23,7 @@ function main_branch
 end
 
 alias ga='git add'
-alias gaa='git add .'
+alias gaa='git add -A'
 alias gap='git add --patch'
 
 # Add all except the files given in the arguments
@@ -60,7 +60,7 @@ alias gc='git clone'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 
-alias cma='git add .; git commit -m'
+alias cma='git add -A; git commit -m'
 
 # Commit staged files, or else all except .env
 function cm
@@ -74,7 +74,7 @@ function cm
   end
 end
 
-alias caa='git add .; git commit --amend --no-edit'
+alias caa='git add -A; git commit --amend --no-edit'
 
 # Amend commit with staged files, or else all except .env
 function ca
@@ -110,7 +110,7 @@ function gd
   git diff HEAD~$first_commit..HEAD~$second_commit
 end
 
-alias gds='git add .; git diff --shortstat HEAD; git reset >/dev/null'
+alias gds='git add -A; git diff --shortstat HEAD; git reset >/dev/null'
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
 
 function gls
