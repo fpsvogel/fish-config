@@ -206,6 +206,13 @@ alias gss='git stash show'
 alias gssp='git stash show -p'
 alias gs='git status -u'
 
+function gsf
+  git fetch upstream
+  git switch (main_branch)
+  git rebase upstream/main
+  git push origin (main_branch)
+end
+
 function gw
   set branch_to_switch ""
 
