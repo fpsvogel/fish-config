@@ -213,10 +213,11 @@ alias gss='git stash show'
 alias gssp='git stash show -p'
 alias gs='git status -u'
 
+# sync fork to upstream
 function gsf
   git fetch upstream
   git switch (main_branch)
-  git rebase upstream/main
+  git rebase upstream/(main_branch)
   git push origin (main_branch)
 end
 
