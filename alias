@@ -318,6 +318,14 @@ function rmu
   rails db:migrate:up VERSION=$argv[1]
 end
 
+function rmdu
+  rails data:migrate:up VERSION=$argv[1]
+end
+
+function rmdut
+  rails data:migrate:up RAILS_ENV=test VERSION=$argv[1]
+end
+
 # function rmut
 #   rails db:migrate:up RAILS_ENV=test VERSION=$argv[1]
 # end
