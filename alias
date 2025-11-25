@@ -291,35 +291,36 @@ alias rs='rails s'
 alias rsp='PROFILE=true rails s'
 alias rc='rails c'
 alias rcv='rails c --sandbox'
-alias rmg='rails db:migrate RAILS_ENV=development'
-alias rmp='rails db:test:prepare'
-alias rmgp='rails db:test:prepare'
-alias rmt='rails db:migrate RAILS_ENV=test'
-alias rmgt='rails db:migrate RAILS_ENV=test'
+alias rmg='rails db:migrate'
+# alias rmt='rails db:migrate RAILS_ENV=test'
+
+function rms
+  rails db:drop; rails db:setup
+end
 
 function rmr
   rails db:rollback STEP=$argv[1]
 end
 
-function rmrt
-  rails db:rollback RAILS_ENV=test STEP=$argv[1]
-end
+# function rmrt
+#   rails db:rollback RAILS_ENV=test STEP=$argv[1]
+# end
 
 function rmd
   rails db:migrate:down VERSION=$argv[1]
 end
 
-function rmdt
-  rails db:migrate:down RAILS_ENV=test VERSION=$argv[1]
-end
+# function rmdt
+#   rails db:migrate:down RAILS_ENV=test VERSION=$argv[1]
+# end
 
 function rmu
   rails db:migrate:up VERSION=$argv[1]
 end
 
-function rmut
-  rails db:migrate:up RAILS_ENV=test VERSION=$argv[1]
-end
+# function rmut
+#   rails db:migrate:up RAILS_ENV=test VERSION=$argv[1]
+# end
 
 alias rlog='tail -f log/development.log'
 alias b='bundle'
