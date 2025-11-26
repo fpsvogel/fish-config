@@ -99,7 +99,6 @@ function ca
   end
 end
 
-alias cam='git commit  --allow-empty --amend -m'
 alias ce='git commit --allow-empty -m "Empty commit to trigger CI"'
 
 function gd
@@ -131,7 +130,6 @@ end
 
 alias gp='git push'
 alias gpf='git push --force-with-lease'
-alias gpff='git push --force'
 
 function gpl
   set env_or_gemfile_changes (git status --porcelain $git_ignore_in_dot_com 2>/dev/null)
@@ -147,7 +145,6 @@ end
 alias pr='echo "https://github.com/kin/dot-com/compare/(git_current_branch)" | pbcopy'
 
 alias grm='gw (main_branch); git pull; gw -; git rebase (main_branch)'
-alias gri='git rebase -i'
 
 function gr
   # Interactive rebase last n commits
@@ -221,6 +218,8 @@ function gsf
   git push origin (main_branch)
 end
 
+alias gt="git tag"
+
 function gw
   set branch_to_switch ""
 
@@ -253,7 +252,6 @@ function gw
   end
 end
 
-alias gt="git tag"
 alias gw-='gw -'
 alias gwc='git switch --create'
 alias gwm='gw (main_branch)'
@@ -275,7 +273,6 @@ alias pg='psql -U postgres'
 alias maria='mysql.server start'
 
 # RUBY
-alias bt='bin/bridgetown'
 alias bs='bin/bridgetown start'
 
 # RAKE

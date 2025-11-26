@@ -1,6 +1,7 @@
 [user]
   name = Felipe Vogel
   email = fps.vogel@gmail.com
+	signingkey = 4957CF95A0B6E250E555055A8A96A7EEBC7F6865
 [core]
   editor = code --wait
   pager = delta
@@ -19,3 +20,5 @@
   algorithm = histogram
 [push]
   autoSetupRemote = true
+[commit]
+	gpgsign = true
