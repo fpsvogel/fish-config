@@ -382,6 +382,11 @@ end
 # DRAGONRUBY GAME TOOLKIT
 alias dr='./dragonruby'
 
+# ROC
+function roc
+  zig-out/bin/roc $argv[1]
+end
+
 # HASKELL
 alias cr='cabal run'
 alias cv='cabal repl --with-ghc=doctest'
