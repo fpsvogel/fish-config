@@ -181,10 +181,15 @@ alias grosm='git restore --source (main_branch) db/schema.rb db/data_schema.rb'
 alias grv='git revert --no-edit'
 
 function gst
-  if test -f .env
-    git add .env
-    git stash --keep-index --include-untracked
-    git reset .env
+  if test (count $argv) -gt 0
+    # When specific files are given, they must first be added to the index so they can be stashed
+    for file in $argv
+      if test -f $file
+        git add $file 2>/dev/null
+      end
+    end
+
+    git stash push $argv
   else
     git stash --keep-index --include-untracked
   end
