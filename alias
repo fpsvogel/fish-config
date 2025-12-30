@@ -215,6 +215,8 @@ alias gss='git stash show'
 alias gssp='git stash show -p'
 alias gs='git status -u'
 
+alias gau='git remote add upstream'
+
 # sync fork to upstream
 function gsf
   git fetch upstream
@@ -410,4 +412,5 @@ alias nt='pnpm test'
 alias pnpx='pnpm dlx'
 
 # Kin
-alias kg="toggle-kin-gem administered_policies && toggle-kin-gem kin_portal"
+alias kp="toggle-kin-gem kin_portal"
+alias ap="toggle-kin-gem administered_policies"
