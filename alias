@@ -215,7 +215,7 @@ alias gss='git stash show'
 alias gssp='git stash show -p'
 alias gs='git status -u'
 
-alias gau='git remote add upstream'
+alias grau='git remote add upstream'
 
 # sync fork to upstream
 function gsf
@@ -335,7 +335,7 @@ end
 # end
 
 alias rlog='tail -f log/development.log'
-alias b='bundle'
+alias b='bundle install'
 alias be='bundle exec'
 
 # EXERCISM
