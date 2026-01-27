@@ -155,6 +155,15 @@ function glsd
   gl --grep="$argv" -i -p
 end
 
+# from https://stackoverflow.com/a/29012789
+# uses https://github.com/AlDanial/cloc
+function gloc
+  git clone --depth 1 $argv[1] temp-linecount-repo
+  printf "('temp-linecount-repo' will be deleted automatically)\n\n\n"
+  cloc temp-linecount-repo
+  rm -rf temp-linecount-repo
+end
+
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 
