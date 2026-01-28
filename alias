@@ -12,7 +12,7 @@
 set -g git_ignore_in_dot_com .env Gemfile Gemfile.lock
 
 function git_current_branch
-  git symbolic-ref --short HEAD
+  git branch --show-current
 end
 
 # Catch-all for "master" or  "main"
@@ -104,7 +104,7 @@ alias ce='git commit --allow-empty -m "Empty commit to trigger CI"'
 function gd
   # By default, show diff of last commit (if on main branch) or else of entire branch
   # Note: the following lines are duplicated between gd and gds
-  if test (git_current_branch) = (main_branch)
+  if test -n "$git_current_branch" && test (git_current_branch) = (main_branch)
     set first_commit 1
   else
     set first_commit (git rev-list --count HEAD --not (main_branch))
@@ -125,7 +125,7 @@ end
 function gds
   # By default, show diff of last commit (if on main branch) or else of entire branch
   # Note: the following lines are duplicated between gd and gds
-  if test (git_current_branch) = (main_branch)
+  if test -n "$git_current_branch" && test (git_current_branch) = (main_branch)
     set first_commit 1
   else
     set first_commit (git rev-list --count HEAD --not (main_branch))
