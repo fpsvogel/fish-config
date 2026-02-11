@@ -101,9 +101,10 @@ end
 
 alias ce='git commit --allow-empty -m "Empty commit to trigger CI"'
 
+# git diff
 function gd
+  # Note: the following lines are duplicated between gd, gds
   # By default, show diff of last commit (if on main branch) or else of entire branch
-  # Note: the following lines are duplicated between gd and gds
   if test -n "$git_current_branch" && test (git_current_branch) = (main_branch)
     set first_commit 1
   else
@@ -122,9 +123,10 @@ function gd
   git diff HEAD~$first_commit..HEAD~$second_commit $argv[3]
 end
 
+# git diff short
 function gds
+  # Note: the following lines are duplicated between gd, gds
   # By default, show diff of last commit (if on main branch) or else of entire branch
-  # Note: the following lines are duplicated between gd and gds
   if test -n "$git_current_branch" && test (git_current_branch) = (main_branch)
     set first_commit 1
   else
@@ -143,6 +145,9 @@ function gds
   git diff --shortstat HEAD~$first_commit..HEAD~$second_commit $argv[3]
   git diff --name-only HEAD~$first_commit..HEAD~$second_commit $argv[3]
 end
+
+# gid difftastic
+alias gdt="env GIT_EXTERNAL_DIFF=difft git log -p --ext-diff"
 
 alias gl='git log --pretty=format:"%C(yellow)%h %C(cyan)%ad %Cgreen%an %Creset%s%C(brightred)%d" --date=short --graph'
 
