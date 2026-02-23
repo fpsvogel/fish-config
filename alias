@@ -1,3 +1,18 @@
+# Copy the following input, or (if no arg) the input last entered.
+function p
+  if test (count $argv) -gt 0
+    echo $argv | pbcopy
+  else
+    echo $__last_input_for_p | pbcopy
+  end
+end
+
+# Hook for tracking the last-entered input, for the `p` function above.
+function __track_input_for_p --on-event fish_preexec
+  set -g __last_input_for_p $__curr_input_for_p
+  set -g __curr_input_for_p $argv[1]
+end
+
 # GIT
 
 # Tip: VS Code keybinding to insert current filename in terminal.
