@@ -14,6 +14,7 @@ function __track_input_for_p --on-event fish_preexec
 end
 
 # GIT
+# See also: https://github.com/tj/git-extras
 
 # Tip: VS Code keybinding to insert current filename in terminal.
 # Add to keybindings.json, via the command "Preferences: Open Keyboard Shortcuts (JSON)".
