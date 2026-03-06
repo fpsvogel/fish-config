@@ -395,6 +395,7 @@ end
 
 alias rlog='tail -f log/development.log'
 alias b='bundle install'
+alias buc='bundle update --conservative'
 alias be='bundle exec'
 
 # EXERCISM
@@ -472,4 +473,6 @@ alias pnpx='pnpm dlx'
 
 # Kin
 alias kp="toggle-kin-gem kin_portal"
+alias bkp="bundle update --conservative kin_portal"
 alias ap="toggle-kin-gem administered_policies"
+alias bap="bundle update --conservative administered_policies"
