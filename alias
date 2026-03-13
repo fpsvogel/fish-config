@@ -339,7 +339,7 @@ alias pg='psql -U postgres'
 alias maria='mysql.server start'
 
 # RUBY
-alias bs='bin/bridgetown start'
+alias bs='CONSOLE_ERROR=Async::Task bin/bridgetown start'
 
 # RAKE
 alias r='rake'
