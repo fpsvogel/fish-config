@@ -1,5 +1,5 @@
 # Copy the following input, or (if no arg) the input last entered.
-function p
+function cc
   if test (count $argv) -gt 0
     echo $argv | pbcopy
   else
@@ -454,17 +454,22 @@ function roc
   zig-out/bin/roc $argv[1]
 end
 
-# HASKELL
-alias cr='cabal run'
-alias cv='cabal repl --with-ghc=doctest'
-# TODO avoid running cabal test first
-alias ct='cabal test >/dev/null; cabal run test:tests'
-function cc
-  cabal-prettify --this --expose
-  for file in *.cabal
-    sed -i '/other-modules:/ s/ Spec$//' $file
-  end
-end
+# CRYSTAL
+alias cr='crystal'
+
+# # HASKELL
+# # RM now conflicts with crystal alias
+# alias cr='cabal run'
+# alias cv='cabal repl --with-ghc=doctest'
+# # TODO avoid running cabal test first
+# alias ct='cabal test >/dev/null; cabal run test:tests'
+# # RM now conflicts with copy input alias
+# function cc
+#   cabal-prettify --this --expose
+#   for file in *.cabal
+#     sed -i '/other-modules:/ s/ Spec$//' $file
+#   end
+# end
 
 # PNPM
 alias ni='pnpm install'

@@ -12,5 +12,5 @@ Pry.commands.alias_command "q", "exit"
 # Pry.commands.alias_command "w", "whereami" # unnecessary because @ shows whereami
 
 Pry::Commands.block_command "cp", "Copy last command to clipboard" do
-  IO.popen("pbcopy", "w") { |cb| cb.write(pry_instance.input_array.last) }
+  IO.popen("pbcopy", "w") { |cb| cb.write(pry_instance.input_ring[-1]) }
 end
