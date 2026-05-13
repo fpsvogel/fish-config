@@ -1,5 +1,5 @@
 # Copy the following input, or (if no arg) the input last entered.
-function cc
+function p
   if test (count $argv) -gt 0
     echo $argv | pbcopy
   else
@@ -463,7 +463,6 @@ alias cr='crystal'
 # alias cv='cabal repl --with-ghc=doctest'
 # # TODO avoid running cabal test first
 # alias ct='cabal test >/dev/null; cabal run test:tests'
-# # RM now conflicts with copy input alias
 # function cc
 #   cabal-prettify --this --expose
 #   for file in *.cabal
