@@ -75,6 +75,15 @@ function gbda
   end
 end
 
+# Renames the current branch, when it has already been pushed up to origin
+# If the branch hasn't been pushed up yet, use git branch -m
+function gbr
+  git branch -m $argv
+  git push origin --delete (git_current_branch)
+  git branch --unset-upstream $argv
+  git push
+end
+
 alias gc='git clone'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
