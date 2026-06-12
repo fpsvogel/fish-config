@@ -330,6 +330,14 @@ end
 
 alias gw-='gw -'
 alias gwc='git switch --create'
+
+function gwct
+  set other_fork (string split -f 1 ':' $argv)
+  set branch_in_other_fork (string replace ':' '/' $argv)
+  git fetch $other_fork
+  git switch -c $branch_in_other_fork -t $branch_in_other_fork
+end
+
 alias gwm='gw (main_branch)'
 
 # MISC.
