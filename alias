@@ -3,7 +3,7 @@ function p
   if test (count $argv) -gt 0
     echo $argv | pbcopy
   else
-    echo $__last_input_for_p | pbcopy
+    echo $__last_input_for_p | string trim | pbcopy
   end
 end
 
