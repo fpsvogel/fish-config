@@ -11,6 +11,10 @@ Pry.commands.alias_command "r", "reload-code" # reload current file, or given fi
 Pry.commands.alias_command "q", "exit"
 # Pry.commands.alias_command "w", "whereami" # unnecessary because @ shows whereami
 
-Pry::Commands.block_command "cp", "Copy last command to clipboard" do
+Pry::Commands.block_command "pi", "Copy last input to clipboard" do
   IO.popen("pbcopy", "w") { |cb| cb.write(pry_instance.input_ring[-1]) }
+end
+
+Pry::Commands.block_command "po", "Copy last output to clipboard" do
+  IO.popen("pbcopy", "w") { |cb| cb.write(_) }
 end
