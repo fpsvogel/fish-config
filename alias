@@ -468,10 +468,10 @@ end
 # DRAGONRUBY GAME TOOLKIT
 alias dr='./dragonruby'
 
-# ROC
-function roc
-  zig-out/bin/roc $argv[1]
-end
+# # ROC (dev)
+# function roc
+#   zig-out/bin/roc $argv[1]
+# end
 
 # CRYSTAL
 alias cr='crystal'
