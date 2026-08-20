@@ -17,7 +17,16 @@ fish_add_path ~/.rbenv/bin
 status --is-interactive; and rbenv init - --no-rehash fish | source
 
 # JS
-fish_add_path $nvm_data/v22.13.1/bin
+# A parent process (e.g. VS Code) can export a stale nvm_current_version, which makes
+# conf.d/nvm.fish skip activation and leave Homebrew's node ahead of nvm's on PATH.
+# To use Homebrew's version in a shell session: `nvm use system`
+if status is-interactive; and set --query nvm_default_version
+  set --local _active_node (command --search node)
+  if test "$_active_node" != $nvm_data/$nvm_default_version/bin/node
+    set --erase nvm_current_version
+    nvm use --silent $nvm_default_version
+  end
+end
 
 # Coreutils
 fish_add_path /opt/homebrew/opt/coreutils/libexec/gnubin
