@@ -1,0 +1,18 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
+#star-button-box { display:none !important; }
+/*
+  Numbered tabs, based on https://www.reddit.com/r/FirefoxCSS/comments/8ruy2d/comment/e0v2hjk/
+*/
+#tabbrowser-tabs{
+  counter-reset: numkeyidx;
+}
+.tabbrowser-tab .tab-content{padding-left: 2px;}
+.tabbrowser-tab:-moz-any(:nth-of-type(-n+8), :last-of-type) .tab-content::before{
+  display: -moz-box;
+  padding-right:2px;
+  counter-increment: numkeyidx;
+  content: counter(numkeyidx);
+  font-size: smaller;
+  opacity: .5;
+  margin-top: -0.6rem;
+}

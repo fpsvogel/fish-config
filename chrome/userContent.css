@@ -1,0 +1,13 @@
+/* Mastodon: use full browser width for columns */
+@-moz-document domain(ruby.social) {
+  .drawer, .column {
+    /* flex: 1 0 25% !important; */
+    flex: 1 1 auto !important;
+    min-width: 300px !important;
+    max-width: none !important;
+
+    &:nth-child(2) {
+      min-width: 800px !important;
+    }
+  }
+};
