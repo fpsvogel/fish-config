@@ -348,7 +348,13 @@ alias d='cd ~/dev'
 # DOCKER, ETC.
 alias ra='docker compose up'
 alias rr='bin/start-dev-workers'
-alias rv='bin/vite dev'
+function rv
+  if test (basename (pwd)) = "dot-com"
+    bin/shakapacker-dev-server
+  else
+    bin/vite dev
+  end
+end
 
 # POSTGRESQL
 alias pg='psql -U postgres'

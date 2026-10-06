@@ -4,10 +4,10 @@
   Numbered tabs, based on https://www.reddit.com/r/FirefoxCSS/comments/8ruy2d/comment/e0v2hjk/
 */
 #tabbrowser-tabs{
-  counter-reset: numkeyidx;
+  counter-reset: numkeyidx -1;
 }
 .tabbrowser-tab .tab-content{padding-left: 2px;}
-.tabbrowser-tab:-moz-any(:nth-of-type(-n+8), :last-of-type) .tab-content::before{
+.tabbrowser-tab:-moz-any(:nth-of-type(-n+7), :last-of-type) .tab-content::before{
   display: -moz-box;
   padding-right:2px;
   counter-increment: numkeyidx;

@@ -5,9 +5,9 @@
     flex: 1 1 auto !important;
     min-width: 300px !important;
     max-width: none !important;
-
-    &:nth-child(2) {
-      min-width: 800px !important;
-    }
   }
-};
+
+  .column:nth-child(2) {
+    min-width: 800px !important;
+  }
+}
